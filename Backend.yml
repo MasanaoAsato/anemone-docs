@@ -1,0 +1,58 @@
+openapi: "3.1.0"
+
+info:
+  title: Anemone Backend API
+  version: "1.0.0"
+  description: API documentation for the Anemone backend services.
+
+paths:
+  /create:
+    post:
+      summary: "taskの作成"
+      description: "新しいtaskを作成します。"
+      operationId: "createTask"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTaskRequest"
+      responses:
+        '200':
+          description: "タスク作成成功 レスポンス"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateTaskResponse"
+
+components:
+  schemas:
+    CreateTaskRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "タスクのタイトル"
+        content:
+          type: string
+          description: "タスクの内容"
+      required:
+        - title
+        - content
+    CreateTaskResponse:
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: "作成されたタスクのID"
+        title:
+          type: string
+          description: "タスクのタイトル"
+        content:
+          type: string
+          description: "タスクの内容"
+      required:
+        - taskId
+        - title
+        - content  
+      
